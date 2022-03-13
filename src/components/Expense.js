@@ -1,29 +1,39 @@
 import React, { useState } from "react";
-import { Button, Card, Modal } from "react-bootstrap";
+import {
+  Button,
+  Card,
+  Form,
+  FormControl,
+  FormGroup,
+  FormLabel,
+  Modal,
+} from "react-bootstrap";
 import { useDispatch } from "react-redux";
+import { deleteExpense, editExpense } from "../actions/actions";
 
-const Expense = (props) => {
-  const note = props.note;
+const Expense = ({ expense, index }) => {
   const dispatch = useDispatch();
 
   const [isShowing, setIsShowing] = useState(false);
-  const [name, setName] = useState(note.name);
-  const [email, setEmail] = useState(note.email);
-  const [gen, setGen] = useState(note.gen);
+  const [title, setTitle] = useState(expense.title);
+  const [amount, setAmount] = useState(expense.amount);
+  const [category, setCategory] = useState(expense.category);
+  const date = new Date();
 
   const handleDelete = () => {
-    // dispatch(deleteNote(note.id));
+    dispatch(deleteExpense(expense.id));
   };
 
   const handleSubmit = () => {
-    let noteData = {
-      id: note.id,
-      name: name,
-      email: email,
-      date: note.date,
+    let expenseData = {
+      id: expense.id,
+      title: title,
+      amount: amount,
+      category: category,
+      date: expense.date,
     };
 
-    // dispatch(editNote(noteData));
+    dispatch(editExpense(expenseData));
     handleClose();
   };
 
@@ -33,53 +43,82 @@ const Expense = (props) => {
 
   return (
     <>
-      <div className="d-flex justify-content-center">
-        <Card style={{ width: "18rem" }}>
-          <Card.Body>
-            <Card.Text>Name:{note.name}</Card.Text>
-            <Card.Text>:{note.email}</Card.Text>
-            <Card.Text>Note Text:{note.gen}</Card.Text>
-            <Button
-              onClick={() => setIsShowing(true)}
-              variant="outline-primary"
-              size="lg"
-            >
-              Edit
-            </Button>
-            <Button variant="outline-danger" size="lg" onClick={handleDelete}>
-              Delete
-            </Button>
-          </Card.Body>
-        </Card>
-      </div>
+      <tr className="mb-2">
+        <th>{index + 1}</th>
+        <td>{expense.title}</td>
+        <td>{expense.category}</td>
+        <td>${expense.amount}</td>
+        <td>
+          <Button
+            onClick={() => setIsShowing(true)}
+            size="small"
+            className="w-100"
+          >
+            Edit
+          </Button>
+          <Button
+            variant="danger"
+            onClick={handleDelete}
+            size="small"
+            className="w-100"
+          >
+            Delete
+          </Button>
+        </td>
+      </tr>
 
+      {/* Modal Section */}
       <Modal show={isShowing} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <h3 className="text-muted">Edit Expense</h3>
         </Modal.Header>
+
         <Modal.Body>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <input
-            type="text"
-            value={gen}
-            onChange={(e) => setGen(e.target.value)}
-          />
+          <FormGroup className="mb-3" controlId="formBasicName">
+            <FormLabel>Name</FormLabel>
+            <FormControl
+              type="text"
+              placeholder="Name"
+              onSubmit={handleSubmit}
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+          </FormGroup>
+
+          <FormGroup className="mb-3" controlId="formBasicEmail">
+            <FormLabel>Amount</FormLabel>
+            <FormControl
+              type="number"
+              placeholder="Amount"
+              onSubmit={handleSubmit}
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+            />
+          </FormGroup>
+
+          <FormGroup>
+            <FormLabel>Category</FormLabel>
+            <Form.Select
+              aria-label="Default select example"
+              onChange={(e) => setCategory(e.target.value)}
+              value={category}
+            >
+              <option>Select category</option>
+              <option value="Food and Drink">Food and Drink</option>
+              <option value="Accommodation">Accommodation</option>
+              <option value="Transportation">Transportation</option>
+              <option value="Housing and Rent">Housing and Rent</option>
+              <option value=" Miscellaneous"> Miscellaneous</option>
+            </Form.Select>
+          </FormGroup>
         </Modal.Body>
+
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button variant="secondary" onClick={() => setIsShowing(false)}>
             Close
           </Button>
           <Button variant="primary" onClick={handleSubmit}>
-            Save Changes
+            Save changes
           </Button>
         </Modal.Footer>
       </Modal>

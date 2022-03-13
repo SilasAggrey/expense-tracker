@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
 import { v4 as uuid } from "uuid";
 import { Button, FormControl, FormGroup, FormLabel } from "react-bootstrap";
 import { Form } from "react-bootstrap";
+import { createExpense } from "../actions/actions";
+import { useDispatch } from "react-redux";
 
 const ExpenseForm = (props) => {
   const [title, setTitle] = useState("");
@@ -10,10 +11,12 @@ const ExpenseForm = (props) => {
   const [category, setCategory] = useState("");
   const date = new Date();
 
+  const dispatch = useDispatch();
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    let newUser = {
+    let newExpense = {
       id: uuid(),
       title: title,
       amount: amount,
@@ -21,11 +24,11 @@ const ExpenseForm = (props) => {
       date: date,
     };
 
-    props.addUser(newUser);
+    dispatch(createExpense(newExpense));
   };
 
   return (
-    <div className="d-flex justify-content-center">
+    <div>
       <Form className="rounded p-4 p-sm-6" onSubmit={handleSubmit}>
         <FormGroup className="mb-3" controlId="formBasicName">
           <h1>Expense Tracker</h1>
