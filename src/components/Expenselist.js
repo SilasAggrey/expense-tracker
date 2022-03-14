@@ -3,13 +3,14 @@ import { useSelector } from "react-redux";
 import Expense from "./Expense";
 
 const Expenselist = (props) => {
-  const expenses = useSelector((state) => {
-    return state.expenses;
-  });
+  const expenses = useSelector((state) => state.expenses);
+
+  const total = expenses.reduce((prev, cur) => prev + cur.amount, 0);
 
   return (
     <div>
-      <h1 className="text-center">Expenses</h1>
+      <h1>Expenses</h1>
+      <h4>Total Expenses: {total}</h4>
       <table className="table table-dark table-striped">
         <thead>
           <tr>

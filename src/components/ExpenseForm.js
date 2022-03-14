@@ -19,7 +19,7 @@ const ExpenseForm = (props) => {
     let newExpense = {
       id: uuid(),
       title: title,
-      amount: amount,
+      amount: amount * 1,
       category: category,
       date: date,
     };
@@ -33,7 +33,7 @@ const ExpenseForm = (props) => {
         <FormGroup className="mb-3" controlId="formBasicName">
           <h1>Expense Tracker</h1>
           <FormLabel>Name</FormLabel>
-          <FormControl
+          <Form.Control
             type="text"
             placeholder="Name"
             onSubmit={handleSubmit}
@@ -44,7 +44,7 @@ const ExpenseForm = (props) => {
 
         <FormGroup className="mb-3" controlId="formBasicEmail">
           <FormLabel>Amount</FormLabel>
-          <FormControl
+          <Form.Control
             type="number"
             placeholder="Amount"
             onSubmit={handleSubmit}

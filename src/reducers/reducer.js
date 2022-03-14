@@ -1,5 +1,6 @@
 const initialState = {
   expenses: [],
+  totalExpenses: 0,
 };
 
 const reducer = (state = initialState, action) => {
@@ -14,6 +15,7 @@ const reducer = (state = initialState, action) => {
         if (exp.id === action.payload.id) return action.payload;
         else return exp;
       });
+
       return {
         ...state,
         expenses: expenses,
@@ -22,6 +24,7 @@ const reducer = (state = initialState, action) => {
       let updatedExpenses = state.expenses.filter(
         (exp) => exp.id !== action.payload
       );
+
       return {
         ...state,
         expenses: updatedExpenses,
