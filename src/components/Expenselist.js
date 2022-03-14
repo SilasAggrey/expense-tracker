@@ -5,12 +5,9 @@ import Expense from "./Expense";
 const Expenselist = (props) => {
   const expenses = useSelector((state) => state.expenses);
 
-  const total = expenses.reduce((prev, cur) => prev + cur.amount, 0);
-
   return (
     <div>
-      <h1>Expenses</h1>
-      <h4>Total Expenses: {total}</h4>
+      <h4>Expenses</h4>
       <table className="table table-dark table-striped">
         <thead>
           <tr>
@@ -18,6 +15,7 @@ const Expenselist = (props) => {
             <th scope="col">Name</th>
             <th scope="col">Category</th>
             <th scope="col">Amount</th>
+            <th scope="col">Date</th>
             <th scope="col">Actions</th>
           </tr>
         </thead>

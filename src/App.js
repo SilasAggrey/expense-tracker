@@ -4,7 +4,7 @@ import Expenselist from "./components/Expenselist";
 
 function App() {
   return (
-    <div style={{ width: "400px", margin: "auto" }}>
+    <div style={{ width: "600px", margin: "auto" }}>
       <ExpenseForm />
       <Expenselist />
     </div>

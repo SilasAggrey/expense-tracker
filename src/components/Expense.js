@@ -10,6 +10,7 @@ import {
 } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { deleteExpense, editExpense } from "../actions/actions";
+import moment from "moment";
 
 const Expense = ({ expense, index }) => {
   const dispatch = useDispatch();
@@ -48,20 +49,12 @@ const Expense = ({ expense, index }) => {
         <td>{expense.title}</td>
         <td>{expense.category}</td>
         <td>${expense.amount}</td>
+        <td>{moment(expense.date).format("MMMM Do YYYY")}</td>
         <td>
-          <Button
-            onClick={() => setIsShowing(true)}
-            size="small"
-            className="w-100"
-          >
+          <Button onClick={() => setIsShowing(true)} size="small">
             Edit
           </Button>
-          <Button
-            variant="danger"
-            onClick={handleDelete}
-            size="small"
-            className="w-100"
-          >
+          <Button variant="danger" onClick={handleDelete} size="small">
             Delete
           </Button>
         </td>
