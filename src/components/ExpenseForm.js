@@ -4,13 +4,14 @@ import { Button, FormControl, FormGroup, FormLabel } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 import { createExpense } from "../actions/actions";
 import { useDispatch, useSelector } from "react-redux";
+import NumberFormat from "react-number-format";
 
 const ExpenseForm = (props) => {
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
   const [category, setCategory] = useState("");
   const [type, setType] = useState("exp");
-  const date = new Date();
+  const [date, setDate] = useState("");
 
   const dispatch = useDispatch();
 
@@ -38,9 +39,9 @@ const ExpenseForm = (props) => {
       <Form className="rounded p-4 p-sm-6" onSubmit={handleSubmit}>
         <h1>Expense Tracker</h1>
         <div>
-          <FormLabel>Income: 0 </FormLabel>
+          {/* <FormLabel>Income: 0 </FormLabel> */}
           <br />
-          <FormLabel>Total Expense: {totalExpenses}</FormLabel>
+          <FormLabel>Total Expense: ${totalExpenses}</FormLabel>
         </div>
         <br />
         <FormLabel>Name</FormLabel>
@@ -69,12 +70,29 @@ const ExpenseForm = (props) => {
 
         <FormGroup className="mb-3" controlId="formBasicEmail">
           <FormLabel>Amount</FormLabel>
-          <Form.Control
+          {/* <Form.Control
             type="number"
             placeholder="Amount"
             onSubmit={handleSubmit}
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
+          /> */}
+          <NumberFormat
+            style={{ width: "100%", padding: "5px 10px " }}
+            placeholder="Amount"
+            onValueChange={(e) => setAmount(e.value)}
+            thousandSeparator={true}
+            prefix={"$"}
+          />
+        </FormGroup>
+
+        <FormGroup className="mb-3" controlId="formBasicEmail">
+          <FormLabel>Date</FormLabel>
+          <Form.Control
+            type="date"
+            onSubmit={handleSubmit}
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
           />
         </FormGroup>
 
