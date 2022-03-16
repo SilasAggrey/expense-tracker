@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { v4 as uuid } from "uuid";
-import { Button, FormControl, FormGroup, FormLabel } from "react-bootstrap";
+import { Button, FormGroup, FormLabel } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 import { createExpense } from "../actions/actions";
 import { useDispatch, useSelector } from "react-redux";
@@ -70,13 +70,6 @@ const ExpenseForm = (props) => {
 
         <FormGroup className="mb-3" controlId="formBasicEmail">
           <FormLabel>Amount</FormLabel>
-          {/* <Form.Control
-            type="number"
-            placeholder="Amount"
-            onSubmit={handleSubmit}
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-          /> */}
           <NumberFormat
             style={{ width: "100%", padding: "5px 10px " }}
             placeholder="Amount"
