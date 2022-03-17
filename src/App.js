@@ -10,6 +10,7 @@ function App() {
         width: "600px",
         margin: "auto",
         backgroundImage: expensetracker,
+        minHeight: "60vh",
       }}
     >
       <ExpenseForm />
