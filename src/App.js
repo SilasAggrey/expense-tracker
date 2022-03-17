@@ -9,7 +9,7 @@ function App() {
       style={{
         width: "600px",
         margin: "auto",
-        backgroundImage: `url(${expensetracker})`,
+        // backgroundImage: `url(${expensetracker})`,
       }}
     >
       <ExpenseForm />
