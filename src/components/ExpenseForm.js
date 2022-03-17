@@ -41,7 +41,12 @@ const ExpenseForm = (props) => {
         <div>
           {/* <FormLabel>Income: 0 </FormLabel> */}
           <br />
-          <FormLabel>Total Expense: ${totalExpenses}</FormLabel>
+          <NumberFormat
+            displayType="text"
+            value={totalExpenses}
+            thousandSeparator={true}
+            prefix={"Total Expense: $"}
+          />
         </div>
         <br />
         <FormLabel>Name</FormLabel>
